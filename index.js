@@ -1,5 +1,5 @@
 const { listen } = require('./core/express');
-const connectDB = require('./core/db');
+const { connectDB } = require('./core/db');
 
 (async () => {
     try {

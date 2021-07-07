@@ -28,7 +28,7 @@ exports.updateUserById = async ({params: {id}}, res) => {
 
 exports.joinToRoom = async ({body: {userId, roomId}}, res) => {
     const oldRoom = await userServices.joinToRoom(userId, roomId);
-    if (oldRoom !== null && JSON.stringify(oldRoom) !== JSON.stringify(roomId)) {
+    if (oldRoom !== null) {
         await leaveUserFromRoom(oldRoom, userId);
     }
     await joinUserToRoom(roomId, userId);
