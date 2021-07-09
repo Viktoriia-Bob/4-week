@@ -1,7 +1,7 @@
 const messages = require('../models/message.models');
 
 exports.list = async() => {
-    return messages.find({}).limit(10).lean();
+    return messages.find().limit(10).lean();
 };
 
 exports.getById = async(id) => {
@@ -20,10 +20,10 @@ exports.updateMessage = async(id) => {
     return messages.findByIdAndUpdate(id).lean();
 };
 
-exports.getAllMessagesByUser = async(uId) => {
-    return messages.find({ownerId: uId}).populate('User').limit(10);
+exports.getAllMessagesByUser = async(userId) => {
+    return messages.find({ ownerId: userId }).populate('User').limit(10);
 };
 
-exports.getAllMessagesByRoom = async(rId) => {
-    return messages.find({roomId: rId}).populate('Room').limit(10);
+exports.getAllMessagesByRoom = async(roomId) => {
+    return messages.find({ roomId }).populate('Room').limit(10);
 };

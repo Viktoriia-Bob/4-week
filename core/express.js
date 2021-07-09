@@ -5,7 +5,7 @@ const PORT = 3000;
 const PID = process.pid;
 
 app.use(cors());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.listen(PORT, () => {

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const roomControllers = require('../controllers/room.controllers');
-const {validate} = require('express-validation');
-const {create} = require('../validators/room.validation');
+const { validate } = require('express-validation');
+const { create } = require('../validators/room.validation');
 
 router.get('/', roomControllers.listRooms);
 router.get('/:id', roomControllers.getRoomById);
