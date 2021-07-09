@@ -4,11 +4,14 @@ exports.list = async () => {
     return users.find()
         .limit(10)
         .sort({name: 1})
+        .populate('roomId')
         .lean();
 };
 
 exports.getById = async (id) => {
-    return users.findById(id).lean();
+    return users.findById(id)
+        .populate('roomId')
+        .lean();
 };
 
 exports.createUser = async(body) => {
@@ -16,11 +19,12 @@ exports.createUser = async(body) => {
 };
 
 exports.deleteUser = async(id) => {
-    return users.findByIdAndDelete(id).lean();
+    return users.findByIdAndDelete(id);
 };
 
 exports.updateUser = async(id) => {
-    return users.findByIdAndUpdate(id, {}, {new: true}).lean();
+    return users.findByIdAndUpdate(id, {}, {new: true})
+    .lean();
 };
 
 exports.joinToRoom = async(userId, roomId) => {
@@ -30,11 +34,14 @@ exports.joinToRoom = async(userId, roomId) => {
 };
 
 exports.leaveFromRoom = async(userId) => {
-    return users.findByIdAndUpdate(userId, { roomId: null }, { new: true }).lean();
+    return users.findByIdAndUpdate(userId, { roomId: null }, { new: true })
+        .lean();
 };
 
 exports.getAllUsersFromRoom = async(roomId) => {
-    return users.find({ roomId }).populate('Room').limit(10);
+    return users.find({ roomId })
+        .populate('roomId')
+        .limit(10);
 };
 
 exports.deleteAllUsersFromRoom = async(roomId) => {

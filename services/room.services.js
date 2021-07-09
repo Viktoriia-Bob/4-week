@@ -4,11 +4,14 @@ exports.list = async() => {
     return rooms.find()
         .limit(10)
         .sort({title: 1})
+        .populate('ownerId')
         .lean();
 };
 
 exports.getById = async(id) => {
-    return rooms.findById(id).lean();
+    return rooms.findById(id)
+        .populate('ownerId')
+        .lean();
 };
 
 exports.createRoom = async(body) => {
@@ -16,11 +19,13 @@ exports.createRoom = async(body) => {
 };
 
 exports.deleteRoom = async(id) => {
-    return rooms.findByIdAndDelete(id).lean();
+    return rooms.findByIdAndDelete(id)
+        .lean();
 };
 
 exports.updateRoom = async(id) => {
-    return rooms.findByIdAndUpdate(id).lean();
+    return rooms.findByIdAndUpdate(id)
+        .lean();
 };
 
 exports.joinUserToRoom = async(roomId, userId) => {
@@ -32,5 +37,7 @@ exports.leaveUserFromRoom = async(roomId, userId) => {
 };
 
 exports.getAllRoomsByUser = async(userId) => {
-    return rooms.find({ ownerId: userId }).populate('User').limit(10);
+    return rooms.find({ ownerId: userId })
+        .populate('ownerId')
+        .limit(10);
 };

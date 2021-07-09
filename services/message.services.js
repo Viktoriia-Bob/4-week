@@ -1,11 +1,18 @@
 const messages = require('../models/message.models');
 
 exports.list = async() => {
-    return messages.find().limit(10).lean();
+    return messages.find()
+        .limit(10)
+        .populate('ownerId')
+        .populate('roomId')
+        .lean();
 };
 
 exports.getById = async(id) => {
-    return messages.findById(id).lean();
+    return messages.findById(id)
+        .populate('ownerId')
+        .populate('roomId')
+        .lean();
 };
 
 exports.createMessage = async(body) => {
@@ -13,7 +20,7 @@ exports.createMessage = async(body) => {
 };
 
 exports.deleteMessage = async(id) => {
-    return messages.findByIdAndDelete(id).lean();
+    return messages.findByIdAndDelete(id);
 };
 
 exports.updateMessage = async(id) => {
@@ -21,9 +28,15 @@ exports.updateMessage = async(id) => {
 };
 
 exports.getAllMessagesByUser = async(userId) => {
-    return messages.find({ ownerId: userId }).populate('User').limit(10);
+    return messages.find({ ownerId: userId })
+        .populate('ownerId')
+        .limit(10)
+        .lean();
 };
 
 exports.getAllMessagesByRoom = async(roomId) => {
-    return messages.find({ roomId }).populate('Room').limit(10);
+    return messages.find({ roomId })
+        .populate('roomId')
+        .limit(10)
+        .lean();
 };
