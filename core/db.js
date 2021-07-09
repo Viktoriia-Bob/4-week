@@ -1,6 +1,6 @@
 const { connect } = require('mongoose');
 
-exports.connectDB = async () => connect('mongodb+srv://admin:admin12345@cluster0.62gyx.mongodb.net/chat', {
+exports.connectDB = async () => connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true

@@ -1,7 +1,10 @@
 const rooms = require('../models/room.models');
 
 exports.list = async() => {
-    return rooms.find({}).limit(10).sort({title: 'descending'}).lean();
+    return rooms.find({})
+        .limit(10)
+        .sort({title: 1})
+        .lean();
 };
 
 exports.getById = async(id) => {

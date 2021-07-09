@@ -1,7 +1,10 @@
 const users = require('../models/user.models');
 
 exports.list = async () => {
-    return users.find({}).limit(10).sort({name: 'ascending'}).lean();
+    return users.find({})
+        .limit(10)
+        .sort({name: 1})
+        .lean();
 };
 
 exports.getById = async (id) => {

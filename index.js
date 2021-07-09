@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { listen } = require('./core/express');
 const { connectDB } = require('./core/db');
 require('./routes/index.routes');
