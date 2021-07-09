@@ -14,7 +14,9 @@ exports.getRoomById = async({ params: { id } }, res) => {
 exports.createRoom = async({ body }, res) => {
     let room = await roomServices.createRoom(body);
     const oldRoom = await joinToRoom(body.ownerId, room._id);
-    await roomServices.leaveUserFromRoom(oldRoom, body.ownerId);
+    if (oldRoom !== null) {
+        await roomServices.leaveUserFromRoom(oldRoom, body.ownerId);
+    }
     room = await roomServices.joinUserToRoom(room._id, body.ownerId);
     room.save();
     res.status(200).json(room);
