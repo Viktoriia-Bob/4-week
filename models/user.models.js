@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-const defaultAvatar = 'https://images.unsplash.com/photo-1466921583968-f07aa80c526e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80';
+const defaultAvatar = 'https://picsum.photos/200/300';
 
 const userSchema = new Schema({
     name: {

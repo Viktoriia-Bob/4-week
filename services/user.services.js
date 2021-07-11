@@ -2,8 +2,8 @@ const users = require('../models/user.models');
 
 exports.list = async () => {
     return users.find()
-        .limit(10)
-        .sort({name: 1})
+        .limit(20)
+        .sort({ name: 1 })
         .populate('roomId')
         .lean();
 };
@@ -41,7 +41,8 @@ exports.leaveFromRoom = async(userId) => {
 exports.getAllUsersFromRoom = async(roomId) => {
     return users.find({ roomId })
         .populate('roomId')
-        .limit(10);
+        .limit(20)
+        .sort({ createdAt: 1 });
 };
 
 exports.deleteAllUsersFromRoom = async(roomId) => {

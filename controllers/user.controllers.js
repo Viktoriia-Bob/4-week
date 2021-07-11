@@ -12,13 +12,13 @@ exports.getUserById = async ({ params: { id } }, res) => {
 };
 
 exports.createUser = async ({ body }, res) => {
-    const user = await userServices.createUser(body);
-    res.status(200).json(user);
+    await userServices.createUser(body);
+    res.status(201).json({ message: 'The item was created successfully' });
 };
 
 exports.deleteUserById = async ({ params: { id } }, res) => {
     await userServices.deleteUser(id);
-    res.status(200).redirect('/users');
+    res.status(204).json({ message: 'The item was deleted successfully' });
 };
 
 exports.updateUserById = async ({ params: { id } }, res) => {
@@ -32,13 +32,13 @@ exports.joinToRoom = async ({ body: { userId, roomId } }, res) => {
         await leaveUserFromRoom(oldRoom, userId);
     }
     await joinUserToRoom(roomId, userId);
-    res.status(200).redirect(`/users/${userId}`);
+    res.status(204);
 };
 
 exports.leaveFromRoom = async ({ body: { userId, roomId } }, res) => {
     await userServices.leaveFromRoom(userId);
     await leaveUserFromRoom(roomId, userId);
-    res.status(200).redirect(`/users/${userId}`);
+    res.status(204);
 };
 
 exports.getAllUsersFromRoom = async ({ params: { roomId } }, res) => {

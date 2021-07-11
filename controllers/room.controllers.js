@@ -19,13 +19,13 @@ exports.createRoom = async({ body }, res) => {
     }
     room = await roomServices.joinUserToRoom(room._id, body.ownerId);
     room.save();
-    res.status(200).json(room);
+    res.status(201).json({ message: 'The item was created successfully' });
 };
 
 exports.deleteRoomById = async({ params: { id } }, res) => {
     await deleteAllUsersFromRoom(id);
     await roomServices.deleteRoom(id);
-    res.redirect('/rooms');
+    res.status(204).json({ message: 'The item was deleted successfully' });
 };
 
 exports.updateRoomById = async({ params: { id } }, res) => {

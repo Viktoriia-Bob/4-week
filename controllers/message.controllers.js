@@ -11,13 +11,13 @@ exports.getMessageById = async ({ params: { id } }, res) => {
 };
 
 exports.createMessage = async ({ body }, res) => {
-    const message = await messageServices.createMessage(body);
-    res.status(200).json(message);
+    await messageServices.createMessage(body);
+    res.status(201).json({ message: 'The item was created successfully' });
 };
 
 exports.deleteMessageById = async ({ params: { id } }, res) => {
     await messageServices.deleteMessage(id);
-    res.redirect('/messages');
+    res.status(204).json({ message: 'The item was deleted successfully' });
 };
 
 exports.updateMessageById = async ({ params: { id } }, res) => {

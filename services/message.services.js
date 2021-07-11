@@ -2,7 +2,8 @@ const messages = require('../models/message.models');
 
 exports.list = async() => {
     return messages.find()
-        .limit(10)
+        .limit(20)
+        .sort( { createdAt: 1 })
         .populate('ownerId')
         .populate('roomId')
         .lean();
@@ -30,13 +31,15 @@ exports.updateMessage = async(id) => {
 exports.getAllMessagesByUser = async(userId) => {
     return messages.find({ ownerId: userId })
         .populate('ownerId')
-        .limit(10)
+        .limit(20)
+        .sort({ createdAt : 1 })
         .lean();
 };
 
 exports.getAllMessagesByRoom = async(roomId) => {
     return messages.find({ roomId })
         .populate('roomId')
-        .limit(10)
+        .limit(20)
+        .sort( { createdAt: 1 })
         .lean();
 };
